@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: hr-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - hr-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8080/api/hr-processor/current-employees",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: hr-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - hr-network
+    restart: unless-stopped
+
+networks:
+  hr-network:
+    driver: bridge
+
+volumes:
+  hr-data:
+  hr-logs:
