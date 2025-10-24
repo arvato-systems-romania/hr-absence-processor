@@ -78,6 +78,19 @@ data/            # Input/output Excel files
   npm test
   ```
 
+## Release
+
+### Building for Production
+To create a production build of the frontend and backend and prepare for deployment run the following script:
+```cmd
+./deliver.cmd 
+```
+### Deployment
+You can deploy the application by copy the built artifacts from the `release` folder to your machine and running the backend and frontend services using the script:
+```cmd
+./start.cmd
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
