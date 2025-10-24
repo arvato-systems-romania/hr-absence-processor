@@ -19,7 +19,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "npm run build && electron .",
+    "electron-build": "npm run build && electron-builder --dir",
+    "electron-dist": "npm run build && electron-builder --win --x64"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +41,31 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "main": "electron.js",
+  "build": {
+    "extends": [],
+    "appId": "org.hrprocessor.frontend",
+    "productName": "HR Absence Processor",
+    "directories": {
+      "buildResources": "public"
+    },
+    "files": [
+      "build/**/*",
+      "electron.js"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    }
+  },
+  "description": "HR Absence Processor desktop frontend built with React and Electron.",
+  "author": "Costel Aldea <constantin.aldea@bertelsmann.de>",
+  "homepage": "."
 }

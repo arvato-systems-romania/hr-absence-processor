@@ -1,0 +1,13 @@
+appId: org.hrprocessor.frontend
+productName: HR Absence Processor
+files:
+  - build/**/*
+  - main.js
+main: main.js
+directories:
+  buildResources: public
+win:
+  target:
+    - nsis
+    - portable
+
